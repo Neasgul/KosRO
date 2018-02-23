@@ -20,7 +20,7 @@ FUNCTION ACTIVATORS {
   }.
   IF SHIP:ALTITUDE > 140000 {
     FOR antenna IN SHIP:MODULESNAMED("ModuleRTAntenna") {
-      IF antenna:HASEVENT("activate") {
+      IF antenna:HASEVENT("activate") AND antenna:HASFIELD("Mode0OmniRange){
         antenna:DOEVENT("activate").
         PRINT "Activate Antennas".
       }.
