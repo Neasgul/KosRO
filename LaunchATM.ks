@@ -30,6 +30,7 @@ WAIT UNTIL ALT:RADAR > 100.
 PRINT "Gravity Turn".
 SET fullySteeredAngle to 90 - waitPitch.
 SET atmpGround to SHIP:BODY:ATM:SEALEVELPRESSURE * CONSTANT:ATMTOKPA.
+SET maxQ to SHIP:Q.
 
 LOCK altitude to ALT:RADAR.
 LOCK atmp to SHIP:BODY:ATM:ALTITUDEPRESSURE(altitude) * CONSTANT:ATMTOKPA.
@@ -42,6 +43,12 @@ LOCK STEERING to HEADING(azimuth, 90 - firstPhasePitch).
 UNTIL apoeta >= targetApoeta {
 	FLAMEOUT(3).
 	ACTIVATORS().
+    if SHIP:Q > maxQ {
+        SET maxQ to SHIP:Q.
+    }
+    ELSE {
+        PRINT "Passing max Q : " +maxQ.
+    }
 	set endTurnAltitude to altitude.
 	set endRurnOrbitSpeed to SHIP:VELOCITY:ORBIT:MAG.
 	set secondPhasePitch to firstPhasePitch.
