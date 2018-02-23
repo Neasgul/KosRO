@@ -50,7 +50,7 @@ UNTIL apoeta >= targetApoeta {
         PRINT "Passing max Q : " +maxQ.
     }
 	set endTurnAltitude to altitude.
-	set endRurnOrbitSpeed to SHIP:VELOCITY:ORBIT:MAG.
+	set endTurnOrbitSpeed to SHIP:VELOCITY:ORBIT:MAG.
 	set secondPhasePitch to firstPhasePitch.
 }
 UNLOCK firstPhasePitch.
@@ -65,7 +65,7 @@ LOCK shipAngle to VANG(SHIP:UP:VECTOR, SHIP:SRFPROGRADE:VECTOR).
 LOCK correctiondAmp to (altitude - endTurnAltitude) / (atmoEndAltitude - endTurnAltitude).
 LOCK mx to shipAngle + (maxCorrection * correctiondAmp).
 LOCK mi to shipAngle - (maxCorrection * correctiondAmp).
-LOCK orbitSpeedFactor to ((targetOrbitSpeed - SHIP:VELOCITY:ORBIT:MAG) / (targetOrbitSpeed - endRurnOrbitSpeed)).
+LOCK orbitSpeedFactor to ((targetOrbitSpeed - SHIP:VELOCITY:ORBIT:MAG) / (targetOrbitSpeed - endTurnOrbitSpeed)).
 LOCK tApoEta to targetApoeta * orbitSpeedFactor. 
 SET ae to 0.
 LOCK correction to max(-maxCorrection*0.3,((tApoEta - ae) / tolerance) * maxCorrection).
